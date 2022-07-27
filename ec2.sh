@@ -1,8 +1,8 @@
 #!/bin/bash
 
 PS3=""
-echo "Select an option: "
-select option in 'Display running instances' 'Start an ec2 instance' 'Stop an ec2 instance' 'Terminate an ec2 instance'
+echo "Select An Option Below: "
+select option in 'Display Running Instances' 'Start An EC2 Instance' 'Stop An EC2 Instance' 'Terminate An EC2 Instance'
 do
 	echo $option
 done
