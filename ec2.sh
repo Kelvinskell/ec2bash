@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Enable strict mode
-set eo pipefail
+set -euo pipefail
 
 # Define Colours
 Red='\033[1;31m'
@@ -10,6 +10,22 @@ Blue='\033[1;34m'
 Cyan='\033[1;36m'
 Purple='\033[1;35m'
 NC='\033[0;m'
+
+# Check if parameters are supplied
+if [[ $* > 0 ]]
+then
+	# Valiidate parameters
+	if [[ $1 =~ [1-4] ]]
+	then
+		option=$1
+		echo $option
+	fi
+fi
+
+
+
+
+
 
 PS3=""
 echo -e "${Blue}Select An EC2 Management Option Below: ${Cyan}"
