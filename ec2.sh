@@ -12,15 +12,23 @@ Purple='\033[1;35m'
 NC='\033[0;m'
 
 # Check if parameters are supplied
-if [[ $* > 0 ]]
+if [[ $# > 0 ]]
 then
 	# Valiidate parameters
 	if [[ $1 =~ [1-4] ]]
 	then
 		option=$1
 	fi
-fi
 
+	# Validate Instance ids and collect them into an array
+	for id in $*
+	do
+		if [[ $id =~ ^i- ]]
+		then
+			ids+=($id)
+		fi
+	done
+fi
 
 
 
