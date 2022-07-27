@@ -12,7 +12,7 @@ Purple='\033[1;35m'
 NC='\033[0;m'
 
 PS3=""
-echo "Select An EC2 Management Option Below: "
+echo -e "${Blue}Select An EC2 Management Option Below: ${Cyan}"
 select option in 'Display Running Instances' 'Start An EC2 Instance' 'Stop An EC2 Instance' 'Terminate An EC2 Instance'
 do
 	echo $option
