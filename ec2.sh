@@ -18,7 +18,6 @@ then
 	if [[ $1 =~ [1-4] ]]
 	then
 		option=$1
-		echo $option
 	fi
 fi
 
