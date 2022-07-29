@@ -131,6 +131,8 @@ then
 	done
 fi
 
+# Colorize result output
+echo -n -e "${Cyan}"
 # Call ec2 functions based on supllied argument
 case $option in
 
