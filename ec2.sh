@@ -54,7 +54,7 @@ RebootInstance() {
 	# Produce custom output since rebooot-instance command does not produce any output if successful
 	if [[ $? == 0 ]]
 	then
-		echo -e "${Green}Instance(s) successfully rebooted${NC}"
+		echo -e "${Cyan}Instance(s) successfully rebooted${NC}"
 	fi
 	exit $?
 }
