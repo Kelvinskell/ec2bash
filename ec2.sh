@@ -56,14 +56,7 @@ DescribeInstance() {
 	local types+=( $(aws ec2 describe-instances --output text |grep -w INSTANCES |awk '{print $9}') ) 
 	local vpcs+=( $(aws ec2 describe-instances --output text |grep -w INSTANCES |awk '{print $(NF)}') )
 	local state+=( $( aws ec2 describe-instances --output text |grep -w STATE | awk '{print $3}') )
-	# Print all but the first two columns in tags output
-	local tags+=( $(aws ec2 describe-instances --output text |grep -w TAGS |grep -w Name |awk '{$1=$2=""; print $0}') ) 
-	echo ${ids[@]} 
-	echo ${types[@]}
-	echo ${vpcs[@]}
-	echo ${state[@]}
-	echo ${tags[@]}
-
+	tags+=( $(aws ec2 describe-instances --output text |grep -w TAGS |grep -w Name |awk '{print $3}') )
 	exit $?
 }
 
