@@ -103,10 +103,26 @@ then
 	if [[ $1 =~ [1-5] ]]
 	then
 		option=$1
+	else
+		echo -e "${Red}$1 Not a valid option. Valid options are 1, 2, 3 and 4"
+		echo Exiting program...
+		exit 1
+	fi
+
+	# Accept filename input and Capture Instance ids in file
+	if [[ -f $2 ]]
+	then
+		while read line
+		do
+			idarr+=($line)
+		done < <(cat $2)
+	else
+		# Accept instance ids
+		idarr+=($*)
 	fi
 
 	# Validate Instance ids and collect them into an array
-	for id in $*
+	for id in ${idarr[@]}
 	do
 		if [[ $id =~ ^i-[a-z0-9]+{17} ]]
 		then
@@ -147,9 +163,8 @@ if [[ -f $id ]]
 then
 	while read line
 	do
-		ids+=($line)
+		idarr+=($line)
 	done < <(cat $id)
-	echo ${idarr[*]}
 else
 	read -a idarr <<< $id
 fi
@@ -160,7 +175,6 @@ do
 	then
 		ids+=($id)
 	fi
-	echo ${ids[0]}
 done
 
 
