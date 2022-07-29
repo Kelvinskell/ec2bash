@@ -139,10 +139,20 @@ esac
 
 # Accept user argument and collect into an array
 IFS=","
-echo -e "${Cyan}Input instance ids (seperate each instance-id with a comma) or Enter filename containing instance ids: "
+echo -e "${Cyan}Input instance ids (seperate each instance-id with a comma) or Enter filename containing instance ids: ${NC}"
 read  id
-read -a idarr <<< $id
 
+# Capture Instance ids in file
+if [[ -f $id ]]
+then
+	while read line
+	do
+		ids+=($line)
+	done < <(cat $id)
+	echo ${idarr[*]}
+else
+	read -a idarr <<< $id
+fi
 # Validate Instance ids and collect them into an array
 for id in ${idarr[@]}
 do
@@ -150,6 +160,7 @@ do
 	then
 		ids+=($id)
 	fi
+	echo ${ids[0]}
 done
 
 
