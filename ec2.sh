@@ -11,6 +11,16 @@ Cyan='\033[1;36m'
 Purple='\033[1;35m'
 NC='\033[0;m'
 
+
+StartInstance() {
+	for i in $*
+	do
+		echo $i
+	done
+	exit
+}
+
+
 # Check if parameters are supplied
 if [[ $# > 0 ]]
 then
@@ -26,9 +36,12 @@ then
 		if [[ $id =~ ^i- ]]
 		then
 			ids+=($id)
+			echo "This is is an array: ${ids[@]}"
 		fi
 	done
 fi
+
+#StartInstance ${ids[@]}
 
 
 
