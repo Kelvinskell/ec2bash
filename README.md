@@ -5,4 +5,9 @@ Ec2bash streamlines and automates common instance management tasks such as:
 - Rebooting an Instance
 - Terminating an instance
 
-This script also describes your available instances while providing consise output, with a succint summary of instance details.
+This script also describes your available instances while providing concise output, with a succint summary of instance information.
+
+This script is designed to run in two modes:
+- Interactive mode
+- Non-interactive mode
+These features make it even more robust, dynamic and adaptable to different use cases.
