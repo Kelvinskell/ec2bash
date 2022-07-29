@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# Define environment
+PS3=""
+
 # Define Colours
 Red='\033[1;31m'
 Green='\033[1;32m'
 Blue='\033[1;34m'
 Cyan='\033[1;36m'
-Purple='\033[1;35m'
 NC='\033[0;m'
 
 
@@ -133,10 +135,30 @@ case $option in
 		;;
 esac
 
-
-PS3=""
+# Interactively accept arguments from user
 echo -e "${Blue}Select An EC2 Management Option Below: ${Cyan}"
 select option in 'Start An EC2 Instance' 'Stop An EC2 Instance' 'Terminate An EC2 Instance' 'Reboot An EC2 Instance' 'Describe Ec2 Instances'
 do
-	echo $option
+	case $option in
+		'Start An EC2 Instance')
+			StartInstance ${ids[@]}
+			;;
+		'Stop An EC2 Instance')
+			StopInstance ${ids[@]}
+			;;
+		'Terminate An EC2 Instance')
+			TerminateInstance ${ids[@]}
+			;;
+		'Reboot An EC2 Instance')
+			RebootInstance ${ids[@]}
+			;;
+		'Describe EC2 Instances')
+			DescribeInstance
+			;;
+		*)
+			echo -e "${Red}Unrecognised Option /nExiting program...${NC}"
+			exit 1
+			;;
+	esac
+
 done
