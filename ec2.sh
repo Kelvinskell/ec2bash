@@ -52,8 +52,9 @@ RebootInstance() {
 	# Produce custom output since rebooot-instance command does not produce any output if successful
 	if [[ $? == 0 ]]
 	then
-		echo -e "${Green}Instances successfully rebooted${NC}"
+		echo -e "${Green}Instance(s) successfully rebooted${NC}"
 	fi
+	exit $?
 }
 
 
@@ -135,7 +136,7 @@ esac
 
 PS3=""
 echo -e "${Blue}Select An EC2 Management Option Below: ${Cyan}"
-select option in 'Display Running Instances' 'Start An EC2 Instance' 'Stop An EC2 Instance' 'Terminate An EC2 Instance'
+select option in 'Start An EC2 Instance' 'Stop An EC2 Instance' 'Terminate An EC2 Instance' 'Reboot An EC2 Instance' 'Describe Ec2 Instances'
 do
 	echo $option
 done
