@@ -27,6 +27,30 @@ StopInstance() {
 	exit $?
 }
 
+
+RebootInstance() {
+	for id in $*
+	do
+		aws ec2 --dry-run reboot-instance --instance-ids $id
+	done
+
+	# Produce custom output since rebooot-instance command does not produce any output if successful
+	if [[ $? == 0 ]]
+	then
+		echo "Instances successfully rebooted"
+	fi
+}
+
+
+TerminateInstance() {
+	for id in $*
+	do
+		aws ec2 --dry-run terminate-instances --instance-ids $id
+	done
+	exit $?
+}
+
+
 # Check if parameters are supplied
 if [[ $# > 0 ]]
 then
