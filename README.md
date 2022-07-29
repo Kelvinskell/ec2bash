@@ -44,7 +44,7 @@ The second to the nth arguments are expected to be the instance ids upon which t
 
 *To stop instances, the follwoing command can also be executed: `bash ec2.sh 2 instances.txt`*
 
-In the first example, the parameter **1** represents an option for starting instances, while other parameters are the instance ids upon which the script will act on.
+In the first example, the parameter **1** represents an option for starting instances, while the remaining parameters are the instance ids upon which the script will act on.
 
 In the second example, the parameter **2** represents an option for stopping instances, while *instances.txt* is a file containing instance ids.
  
