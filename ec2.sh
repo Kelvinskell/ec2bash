@@ -28,7 +28,7 @@ count() {
 StartInstance() {
 	for id in $*
 	do
-		aws ec2 --dry-run start-instances --instance-ids $id
+		aws ec2  start-instances --instance-ids $id
 	done
 	exit $?
 }
@@ -37,7 +37,7 @@ StartInstance() {
 StopInstance() {
 	for id in $*
 	do
-		aws ec2 --dry-run stop-instances --instance-ids $id
+		aws ec2  stop-instances --instance-ids $id
 	done
 	exit $?
 }
@@ -46,7 +46,7 @@ StopInstance() {
 RebootInstance() {
 	for id in $*
 	do
-		aws ec2 --dry-run reboot-instance --instance-ids $id
+		aws ec2  reboot-instance --instance-ids $id
 	done
 
 	# Produce custom output since rebooot-instance command does not produce any output if successful
@@ -61,7 +61,7 @@ RebootInstance() {
 TerminateInstance() {
 	for id in $*
 	do
-		aws ec2 --dry-run terminate-instances --instance-ids $id
+		aws ec2  terminate-instances --instance-ids $id
 	done
 	exit $?
 }
