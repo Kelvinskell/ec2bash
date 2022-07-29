@@ -60,12 +60,18 @@ DescribeInstance() {
 
 	for (( i == 0; i < ${#ids[*]}; i++ ))
 	do
-		echo -e "Instance id: $ids[$i]"
-		echo -e "Instance type: $types[$i]"
-		echo -e "Instance State: $state[$i]"
-		echo -e "VPC id: $vpcs[$i]"
+		echo -e "Instance id: ${ids[$i]}"
+		echo -e "Instance type: ${types[$i]}"
+		echo -e "Instance State: ${state[$i]}"
+		echo -e "VPC id: ${vpcs[$i]}"
 		echo -e "Name tag: ${tags[$i]}\n"
 	done
+
+	# Display summary statistics
+	echo -e "SUMMARY STATS\n"
+	echo "TOTAL NUMBER OF INSTANCES -----> ${#ids[*]}"
+	echo "RUNINNG INSTANCES -----> " $(echo ${state[@]} |grep -c "running")
+	echo "STOPPED INSTANCES -----> " $(echo ${state[@]} |grep -c "stopped")
 	exit $?
 }
 
