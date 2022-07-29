@@ -79,9 +79,9 @@ DescribeInstance() {
 	for (( i == 0; i < ${#ids[*]}; i++ ))
 	do
 		echo -e "${Green}Instance id: ${ids[$i]}"
-		echo  "Instance type: ${types[$i]}"
-		echo  "Instance State: ${state[$i]}"
-		echo  "VPC id: ${vpcs[$i]}"
+		echo "Instance type: ${types[$i]}"
+		echo "Instance State: ${state[$i]}"
+		echo "VPC id: ${vpcs[$i]}"
 		echo -e "Name tag: ${tags[$i]}${NC}\n"
 	done
 
@@ -91,7 +91,7 @@ DescribeInstance() {
 	echo -e "${Cyan}SUMMARY STATS"
 	echo -e "${Blue}TOTAL NUMBER OF INSTANCES -----> ${#ids[*]}"
 	echo "RUNNING INSTANCES ----->  $runcount "
-	echo -e "STOPPED INSTANCES ----->  $stopcount ${NC}" 
+	echo -e "STOPPED INSTANCES ----->  $stopcount${NC}" 
 	exit $?
 }
 
@@ -135,9 +135,26 @@ case $option in
 		;;
 esac
 
-# Interactively accept arguments from user
+####################INTERACTIVE OPERATIONS####################
+
+# Accept user argument and collect into an array
+IFS=","
+echo -e "${Cyan}Input instance ids (seperate each instance-id with a comma) or Enter filename containing instance ids: "
+read  id
+read -a idarr <<< $id
+
+# Validate Instance ids and collect them into an array
+for id in ${idarr[@]}
+do
+	if [[ $id =~ ^i-[a-z0-9]+{17} ]]
+	then
+		ids+=($id)
+	fi
+done
+
+
 echo -e "${Blue}Select An EC2 Management Option Below: ${Cyan}"
-select option in 'Start An EC2 Instance' 'Stop An EC2 Instance' 'Terminate An EC2 Instance' 'Reboot An EC2 Instance' 'Describe Ec2 Instances'
+select option in 'Start An EC2 Instance' 'Stop An EC2 Instance' 'Terminate An EC2 Instance' 'Reboot An EC2 Instance'
 do
 	case $option in
 		'Start An EC2 Instance')
@@ -152,11 +169,8 @@ do
 		'Reboot An EC2 Instance')
 			RebootInstance ${ids[@]}
 			;;
-		'Describe EC2 Instances')
-			DescribeInstance
-			;;
 		*)
-			echo -e "${Red}Unrecognised Option /nExiting program...${NC}"
+			echo -e "${Red}Unrecognised Option \nExiting program...${NC}"
 			exit 1
 			;;
 	esac
