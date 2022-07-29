@@ -38,10 +38,22 @@ then
 	done
 fi
 
-StartInstance ${ids[@]}
+# Call ec2 functions based on supllied argument
+case $option in
 
-
-
+	1)
+		StartInstance ${ids[@]}
+		;;
+	2)
+		StopInstance ${ids[@]}
+		;;
+	3)
+		TerminateInstance ${ids[@]}
+		;;
+	4)
+		DescribeInstance
+		;;
+esac
 
 
 PS3=""
