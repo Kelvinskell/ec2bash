@@ -52,7 +52,7 @@ RebootInstance() {
 	# Produce custom output since rebooot-instance command does not produce any output if successful
 	if [[ $? == 0 ]]
 	then
-		echo "Instances successfully rebooted"
+		echo -e "${Green}Instances successfully rebooted${NC}"
 	fi
 }
 
@@ -75,20 +75,20 @@ DescribeInstance() {
 
 	for (( i == 0; i < ${#ids[*]}; i++ ))
 	do
-		echo -e "Instance id: ${ids[$i]}"
-		echo -e "Instance type: ${types[$i]}"
-		echo -e "Instance State: ${state[$i]}"
-		echo -e "VPC id: ${vpcs[$i]}"
-		echo -e "Name tag: ${tags[$i]}\n"
+		echo -e "${Green}Instance id: ${ids[$i]}"
+		echo  "Instance type: ${types[$i]}"
+		echo  "Instance State: ${state[$i]}"
+		echo  "VPC id: ${vpcs[$i]}"
+		echo -e "Name tag: ${tags[$i]}${NC}\n"
 	done
 
 	# Display summary statistics
 	runcount=$(count ${state[@]} |awk '{print $1}') 
 	stopcount=$(count ${state[@]} |awk '{print $2}')
-	echo -e "SUMMARY STATS"
-	echo "TOTAL NUMBER OF INSTANCES -----> ${#ids[*]}"
-	echo "RUNNING INSTANCES -----> " $runcount
-	echo "STOPPED INSTANCES -----> " $stopcount
+	echo -e "${Cyan}SUMMARY STATS"
+	echo -e "${Blue}TOTAL NUMBER OF INSTANCES -----> ${#ids[*]}"
+	echo "RUNNING INSTANCES ----->  $runcount "
+	echo -e "STOPPED INSTANCES ----->  $stopcount ${NC}" 
 	exit $?
 }
 
