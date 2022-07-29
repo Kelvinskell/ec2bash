@@ -19,11 +19,19 @@ StartInstance() {
 }
 
 
+StopInstance() {
+	for id in $*
+	do
+		aws ec2 --dry-run stop-instances --instance-ids $id
+	done
+	exit $?
+}
+
 # Check if parameters are supplied
 if [[ $# > 0 ]]
 then
 	# Valiidate parameters
-	if [[ $1 =~ [1-4] ]]
+	if [[ $1 =~ [1-5] ]]
 	then
 		option=$1
 	fi
@@ -51,6 +59,9 @@ case $option in
 		TerminateInstance ${ids[@]}
 		;;
 	4)
+		RebootInstance ${ids[@]}
+		;;
+	5)
 		DescribeInstance
 		;;
 esac
