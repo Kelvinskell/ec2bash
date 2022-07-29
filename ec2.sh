@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Define Colours
 Red='\033[1;31m'
 Green='\033[1;32m'
@@ -8,6 +7,22 @@ Blue='\033[1;34m'
 Cyan='\033[1;36m'
 Purple='\033[1;35m'
 NC='\033[0;m'
+
+
+# Return the number of running and stopped instances
+count() {
+	for inst in $*
+	do
+		if [[ $(echo $inst |grep -w "running") ]]
+		then
+			run+=($inst)
+		elif [[ $(echo $inst |grep -w "stopped") ]]
+		then
+			stop+=($inst)
+		fi
+	done
+	echo ${#run[*]} ${#stop[*]}
+}
 
 
 StartInstance() {
@@ -68,10 +83,12 @@ DescribeInstance() {
 	done
 
 	# Display summary statistics
-	echo -e "SUMMARY STATS\n"
+	runcount=$(count ${state[@]} |awk '{print $1}') 
+	stopcount=$(count ${state[@]} |awk '{print $2}')
+	echo -e "SUMMARY STATS"
 	echo "TOTAL NUMBER OF INSTANCES -----> ${#ids[*]}"
-	echo "RUNINNG INSTANCES -----> " $(echo ${state[@]} |grep -c "running")
-	echo "STOPPED INSTANCES -----> " $(echo ${state[@]} |grep -c "stopped")
+	echo "RUNNING INSTANCES -----> " $runcount
+	echo "STOPPED INSTANCES -----> " $stopcount
 	exit $?
 }
 
