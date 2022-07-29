@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Enable strict mode
-set -euo pipefail
 
 # Define Colours
 Red='\033[1;31m'
@@ -13,11 +11,11 @@ NC='\033[0;m'
 
 
 StartInstance() {
-	for i in $*
+	for id in $*
 	do
-		echo $i
+		aws ec2 --dry-run start-instances --instance-ids $id
 	done
-	exit
+	exit $?
 }
 
 
@@ -36,12 +34,11 @@ then
 		if [[ $id =~ ^i- ]]
 		then
 			ids+=($id)
-			echo "This is is an array: ${ids[@]}"
 		fi
 	done
 fi
 
-#StartInstance ${ids[@]}
+StartInstance ${ids[@]}
 
 
 
