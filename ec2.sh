@@ -31,7 +31,7 @@ then
 	# Validate Instance ids and collect them into an array
 	for id in $*
 	do
-		if [[ $id =~ ^i- ]]
+		if [[ $id =~ ^i-[a-z0-9]+{17} ]]
 		then
 			ids+=($id)
 		fi
